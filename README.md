@@ -1,3 +1,9 @@
+# Test-Bot for Microsoft Botbuilder
+
+This is an example of a Microsoft Botbuilder bot in node.js, that will answer any message with "Hello World !". Its primary use is to test message logging with the Botmeter analytics tool.
+
+# Setup
+
 How to create botbuilder MS example :
 
 https://docs.botframework.com/en-us/node/builder/overview/#navtitle.
@@ -8,10 +14,14 @@ Deployment on Azure using GitHub : https://blogs.msdn.microsoft.com/sarahsays/20
 
 Registering Bot : https://docs.botframework.com/en-us/csharp/builder/sdkreference/gettingstarted.html#registering and go to Registering your Bot with the Microsoft Bot Framework section.
 
-Update app.js in code with AppId and passwords located in sysadmin/Microsoft and re-push to GitHub (automatic publication to Azure).
+Update app.js in code with AppId and password and re-push to GitHub (automatic publication to Azure).
 
-Bot app page : https://developers.facebook.com/apps/232429700527030/dashboard/
+# Logging
 
-Talk to the bot : https://www.facebook.com/testbotbuilder/
+Logging is done using the botmeter-logger middleware. First, require the botmeter-logger package with a suitable Botmeter URL :
 
-AZURE deployment bug : Check if Node Version is 6.5.0 in app settings
+const botmeter = require('@botfuel/botmeter-logger')(process.env.BOTMETER_URL).botbuilder;
+
+To log the message in Botmeter, use the middleware with the Botbuilder bot :
+
+bot.use(botmeter);
